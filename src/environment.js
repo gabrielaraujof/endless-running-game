@@ -1,13 +1,13 @@
-import { SketchElement } from './sketch-element';
+import { SketchEl } from './sketch-el';
 
 function backgroundCount(imageWith, canvasWidth) {
   const ratio = canvasWidth / imageWith;
   return Math.floor(ratio) + 2;
 }
 
-export class Environment extends SketchElement {
-  constructor(s, { envImage, moveSpeed }) {
-    super(s);
+export class Environment extends SketchEl {
+  constructor(sketch, { envImage, moveSpeed }) {
+    super({ sketch });
     this.background = envImage;
     this.moveSpeed = moveSpeed;
     this.position = 0;

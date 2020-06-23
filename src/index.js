@@ -1,31 +1,36 @@
 import { Environment } from './environment';
-import { Character } from './character';
+import { Player } from './player';
 
-const sketch = (s) => {
+const bootstrap = (sketch) => {
   let environment;
   let envImage;
-  let character;
+  let player;
   let charImage;
   let themeMusic;
 
-  s.preload = () => {
-    envImage = s.loadImage('/assets/images/forest.png');
-    charImage = s.loadImage('/assets/images/witch.png');
-    themeMusic = s.loadSound('/assets/audios/theme.mp3');
+  sketch.preload = () => {
+    envImage = sketch.loadImage('/assets/images/forest.png');
+    charImage = sketch.loadImage('/assets/images/witch.png');
+    themeMusic = sketch.loadSound('/assets/audios/theme.mp3');
   };
 
-  s.setup = () => {
-    s.createCanvas(s.windowWidth, s.windowHeight);
-    environment = new Environment(s, { envImage, moveSpeed: 3 });
-    character = new Character(s, { charImage, matrixSize: { x: 4, y: 4 } });
+  sketch.setup = () => {
+    sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
+    environment = new Environment(sketch, { envImage, moveSpeed: 3 });
+    player = new Player({
+      sketch,
+      sprite: charImage,
+      spriteMatrix: { x: 4, y: 4 },
+      position: { y: sketch.height },
+    });
     themeMusic.loop();
-    s.frameRate(30);
+    sketch.frameRate(30);
   };
 
-  s.draw = () => {
+  sketch.draw = () => {
     environment.show();
-    character.show();
+    player.draw();
   };
 };
 
-const sketchInstance = new p5(sketch);
+const sketchInstance = new p5(bootstrap);
