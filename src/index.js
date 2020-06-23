@@ -1,14 +1,22 @@
 import p5 from 'p5';
+import { Environment } from './environment';
 
 const sketch = (s) => {
-    s.setup = () => {
-        s.createCanvas(10, 10);
-    }
+  let background;
+  let environment;
 
-    s.draw = () => {
-        s.background(0);
-        s.circle(10, 10, 10);
-    }
-}
+  s.preload = () => {
+    background = s.loadImage('/assets/images/forest.png');
+  };
+
+  s.setup = () => {
+    s.createCanvas(s.windowWidth, s.windowHeight);
+    environment = new Environment(s, { background, moveSpeed: 3 });
+  };
+
+  s.draw = () => {
+    environment.show();
+  };
+};
 
 const sketchInstance = new p5(sketch);
