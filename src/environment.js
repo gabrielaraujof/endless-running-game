@@ -6,9 +6,9 @@ function backgroundCount(imageWith, canvasWidth) {
 }
 
 export class Environment extends SketchElement {
-  constructor(s, { background, moveSpeed }) {
+  constructor(s, { envImage, moveSpeed }) {
     super(s);
-    this.background = background;
+    this.background = envImage;
     this.moveSpeed = moveSpeed;
     this.position = 0;
     this.height = this.s.height;
